@@ -5,11 +5,19 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <artifactId>banking-um</artifactId>
-        <groupId>am.iunetworks</groupId>
+        <artifactId>bank-user-management</artifactId>
+        <groupId>com.iunetworks</groupId>
         <version>0.0.1</version>
     </parent>
 
-    <artifactId>apis</artifactId>
+    <artifactId>um-api</artifactId>
 
+
+    <dependencies>
+        <dependency>
+            <groupId>com.iunetworks</groupId>
+            <artifactId>um-services</artifactId>
+            <version>0.0.1</version>
+        </dependency>
+    </dependencies>
 </project>
