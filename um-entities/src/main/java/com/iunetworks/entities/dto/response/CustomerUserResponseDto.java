@@ -1,14 +1,17 @@
 package com.iunetworks.entities.dto.response;
 
 import com.iunetworks.entities.Role;
+import com.iunetworks.entities.address.Address;
 import com.iunetworks.entities.enums.Gender;
 import com.iunetworks.entities.enums.UserStatus;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
 public class CustomerUserResponseDto {
+
   private UUID id;
 
   private String name;
@@ -23,14 +26,18 @@ public class CustomerUserResponseDto {
 
   private UserStatus status;
 
+  private Date dob;
+
+  private Address address;
+
   private LocalDateTime created;
 
-  private LocalDateTime updeted;
 
   public CustomerUserResponseDto() {
   }
 
-  public CustomerUserResponseDto(UUID id, String name, String surname, String email, Gender gender, List<Role> roles, UserStatus status, LocalDateTime created, LocalDateTime updeted) {
+  public CustomerUserResponseDto(UUID id, String name, String surname, String email, Gender gender, List<Role> roles,
+                                 UserStatus status, Date dob, Address address, LocalDateTime created) {
     this.id = id;
     this.name = name;
     this.surname = surname;
@@ -38,8 +45,10 @@ public class CustomerUserResponseDto {
     this.gender = gender;
     this.roles = roles;
     this.status = status;
+    this.dob = dob;
+    this.address = address;
     this.created = created;
-    this.updeted = updeted;
+
   }
 
   public UUID getId() {
@@ -98,6 +107,22 @@ public class CustomerUserResponseDto {
     this.status = status;
   }
 
+  public Date getDob() {
+    return dob;
+  }
+
+  public void setDob(Date dob) {
+    this.dob = dob;
+  }
+
+  public Address getAddress() {
+    return address;
+  }
+
+  public void setAddress(Address address) {
+    this.address = address;
+  }
+
   public LocalDateTime getCreated() {
     return created;
   }
@@ -106,11 +131,19 @@ public class CustomerUserResponseDto {
     this.created = created;
   }
 
-  public LocalDateTime getUpdeted() {
-    return updeted;
-  }
-
-  public void setUpdeted(LocalDateTime updeted) {
-    this.updeted = updeted;
+  @Override
+  public String toString() {
+    return "CustomerUserResponseDto{" +
+      "id=" + id +
+      ", name='" + name + '\'' +
+      ", surname='" + surname + '\'' +
+      ", email='" + email + '\'' +
+      ", gender=" + gender +
+      ", roles=" + roles +
+      ", status=" + status +
+      ", dob=" + dob +
+      ", address=" + address +
+      ", created=" + created +
+      '}';
   }
 }

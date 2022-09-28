@@ -22,12 +22,8 @@ public interface RoleRepository extends JpaRepository<Role, UUID> {
   @Modifying
   @Query(nativeQuery = true,
     value = "update db_bank_management_um.t_roles set role_name = ?2 where id = ?1")
-    void update(UUID id, String roleName);
+    void updateRoleName(UUID id, String roleName);
 
-  @Modifying
-  @Query(nativeQuery = true,
-    value = "delete from db_bank_management_um.t_roles where id = ?1")
-  void delete(UUID id);
 
-//  boolean  existsByRoleName(String roleName);
+  boolean  existsByRoleName(String roleName);
 }

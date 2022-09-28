@@ -16,7 +16,6 @@ public class Country {
   @Column(name = "id", updatable = false, nullable = false)
   private UUID id;
 
-  @NotNull
   @Column(name = "country", nullable = false)
   private String country;
 

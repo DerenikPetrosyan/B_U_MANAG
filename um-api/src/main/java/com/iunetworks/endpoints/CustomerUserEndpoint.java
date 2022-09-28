@@ -22,7 +22,7 @@ public class CustomerUserEndpoint {
 
 
   @PostMapping
-  public ResponseEntity<Void> crateCustomerUser(@Valid @RequestBody CustomerUserRequestDto dto) {
+  public ResponseEntity<Void> crateCustomerUser(@RequestBody CustomerUserRequestDto dto) {
     customerUserService.createCustomerUser(dto);
     return ResponseEntity.ok().build();
   }

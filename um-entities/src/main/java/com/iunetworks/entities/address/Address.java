@@ -36,7 +36,6 @@ public class Address {
   @Column(name = "address", nullable = false)
   private String address;
 
-  @NotNull
   @Column(name = "created", nullable = false)
   private LocalDateTime created;
 
@@ -127,5 +126,20 @@ public class Address {
 
   public void setDeleted(LocalDateTime deleted) {
     this.deleted = deleted;
+  }
+
+  @Override
+  public String toString() {
+    return "Address{" +
+      "id=" + id +
+      ", country=" + country +
+      ", state=" + state +
+      ", city=" + city +
+      ", zipCode='" + zipCode + '\'' +
+      ", address='" + address + '\'' +
+      ", created=" + created +
+      ", updated=" + updated +
+      ", deleted=" + deleted +
+      '}';
   }
 }

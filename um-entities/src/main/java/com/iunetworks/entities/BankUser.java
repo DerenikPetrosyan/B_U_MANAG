@@ -1,12 +1,7 @@
 package com.iunetworks.entities;
 
-import com.iunetworks.entities.enums.Gender;
-
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.UUID;
-
 
 @Entity
 @Table(name = "t_bank_user")

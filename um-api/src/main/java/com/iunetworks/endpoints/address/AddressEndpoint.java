@@ -21,7 +21,7 @@ public class AddressEndpoint {
 
   //crate new Address
   @PostMapping
-  public ResponseEntity<Void> crateAddress(@Valid @RequestBody Address address){
+  public ResponseEntity<Void> crateAddress(@RequestBody Address address){
     addressService.crateAddress(address);
     return ResponseEntity.ok().build();
   }
@@ -41,7 +41,7 @@ public class AddressEndpoint {
 
   //update Address
   @PatchMapping("update-address")
-  public ResponseEntity<Void> editAddress(@Valid@RequestBody Address address){
+  public ResponseEntity<Void> editAddress(@RequestBody Address address){
     addressService.update(address);
     return ResponseEntity.ok().build();
   }

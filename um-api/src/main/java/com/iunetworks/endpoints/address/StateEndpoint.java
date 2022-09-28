@@ -22,7 +22,7 @@ public class StateEndpoint {
   }
 
   @PostMapping
-  public ResponseEntity<Void> crateState(@Valid @RequestBody State state){
+  public ResponseEntity<Void> crateState(@RequestBody State state){
     stateService.crateState(state);
     return ResponseEntity.ok().build();
   }
@@ -40,7 +40,7 @@ public class StateEndpoint {
 
 
   @PatchMapping("/update-state")
-  public ResponseEntity<Void> update(@NotNull @RequestParam UUID id, @NotBlank @RequestParam String stateName) {
+  public ResponseEntity<Void> update(@RequestParam UUID id,@RequestParam String stateName) {
     stateService.update(id,stateName);
     return ResponseEntity.ok().build();
   }

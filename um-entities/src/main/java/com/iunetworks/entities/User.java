@@ -6,9 +6,8 @@ import com.iunetworks.entities.enums.UserStatus;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.UUID;
 
 @MappedSuperclass
@@ -20,24 +19,18 @@ public class User {
   @Column(name = "id", updatable = false, nullable = false)
   private UUID id;
 
-
-  @NotBlank
   @Column(name = "name", nullable = false)
   private String name;
 
-  @NotBlank
   @Column(name = "surname", nullable = false)
   private String surname;
 
-  @NotBlank
   @Column(name = "email", nullable = false)
   private String email;
 
-  @NotBlank
   @Column(name = "u_password", nullable = false)
   private String password;
 
-  @NotNull
   @Column(name = "gender", nullable = false)
   @Enumerated(value = EnumType.STRING)
   private Gender gender;
@@ -47,8 +40,8 @@ public class User {
   @Enumerated(value = EnumType.STRING)
   private UserStatus status;
 
-//  @Column(name = "ver_code")
-//  private String verCode;
+  @Column(name = "dob")
+  private Date dob;
 
   @Column(name = "reset_password_token")
   private String resetPasswordToken;
@@ -117,14 +110,6 @@ public class User {
   public void setAddress(Address address) {
     this.address = address;
   }
-//
-//  public String getVerCode() {
-//    return verCode;
-//  }
-//
-//  public void setVerCode(String verCode) {
-//    this.verCode = verCode;
-//  }
 
   @PrePersist
   protected void onCreate() {
@@ -183,6 +168,14 @@ public class User {
 
   public void setEmail(String email) {
     this.email = email;
+  }
+
+  public Date getDob() {
+    return dob;
+  }
+
+  public void setDob(Date dob) {
+    this.dob = dob;
   }
 }
 

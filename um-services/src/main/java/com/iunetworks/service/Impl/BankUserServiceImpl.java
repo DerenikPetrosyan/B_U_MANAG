@@ -43,8 +43,6 @@ public class BankUserServiceImpl implements BankUserService {
 
     bankUser.setStatus(UserStatus.UNVERIFIED);
 
-//    bankUser.setVerCode(RandomString.make(10));
-
     List<Role> roles = new ArrayList<>();
     roles.add(roleService.getRoleByRoleName("BANK_USER"));
 
@@ -57,8 +55,7 @@ public class BankUserServiceImpl implements BankUserService {
   @Override
   public BankUserResponseDto getByBankUserId(UUID id) {
     bankUserValidator.existsBankUser(id);
-//    return bankUserRepository.getByDtoId(id);
-    return null;
+    return bankUserMapper.toBankUserResponseDto( bankUserRepository.findById(id));
   }
 
   @Override
@@ -69,7 +66,8 @@ public class BankUserServiceImpl implements BankUserService {
   @Override
   public void update(BankUserRequestDto dto) {
     bankUserValidator.isValidBankUser(dto);
-//    bankUserRepository.update(dto);
+//    +
+
   }
 
   @Override

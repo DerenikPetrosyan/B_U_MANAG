@@ -1,6 +1,5 @@
 package com.iunetworks.entities;
 
-import com.iunetworks.entities.enums.UserRole;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -17,8 +16,6 @@ public class Role {
   @Column(name = "id", updatable = false, nullable = false)
   private UUID id;
 
-//  @Enumerated(value = EnumType.STRING)
-//  private UserRole roleName;
   private String roleName;
 
 
@@ -39,14 +36,6 @@ public class Role {
   public void setId(UUID id) {
     this.id = id;
   }
-
-//  public UserRole getRoleName() {
-//    return roleName;
-//  }
-//
-//  public void setRoleName(UserRole roleName) {
-//    this.roleName = roleName;
-//  }
 
   public List<Privilege> getPrivileges() {
     return privileges;

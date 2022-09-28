@@ -16,16 +16,13 @@ public class City {
   @Column(name = "id", updatable = false, nullable = false)
   private UUID id;
 
-  @NotBlank
   @Column(name = "city", nullable = false)
   private String city;
 
-  @NotNull
   @ManyToOne
   @JoinColumn(name = "state_id", referencedColumnName = "id")
   private State state;
 
-  @NotNull
   @ManyToOne
   @JoinColumn(name = "country_id", referencedColumnName = "id")
   private Country country;

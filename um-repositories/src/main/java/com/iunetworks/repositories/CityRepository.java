@@ -12,15 +12,5 @@ import java.util.UUID;
 @Repository
 public interface CityRepository extends JpaRepository<City,UUID > {
 
-  City getById(UUID id);
-
-  @Modifying
-  @Query(nativeQuery = true,
-    value = "update db_bank_management_um.t_city set city = ?2 where id = ?1")
-  void updateName(UUID id, String cityName);
-
-  @Modifying
-  @Query(nativeQuery = true,
-    value = "delete from db_bank_management_um.t_city where id = ?1")
-  void delete(UUID id);
+  boolean existsByCity(String city);
 }

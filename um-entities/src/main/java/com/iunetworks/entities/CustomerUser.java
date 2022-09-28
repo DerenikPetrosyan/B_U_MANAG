@@ -8,8 +8,6 @@ import java.util.List;
 @Table(name = "t_costomer_user")
 public class CustomerUser extends User{
 
-
-//  @ManyToMany(cascade = CascadeType.ALL)
   @ManyToMany
   @JoinTable(
     name = "t_costomer_users_roles",

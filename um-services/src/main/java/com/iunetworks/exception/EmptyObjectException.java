@@ -1,9 +1,6 @@
 package com.iunetworks.exception;
 
-import com.iunetworks.entities.dto.request.BankUserRequestDto;
 import org.springframework.http.HttpStatus;
-
-import java.util.UUID;
 
 public class EmptyObjectException extends ApplicationException{
 

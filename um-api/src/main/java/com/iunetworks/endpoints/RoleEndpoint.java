@@ -39,8 +39,8 @@ public class RoleEndpoint {
   }
 
   @PatchMapping("update-role")
-  public ResponseEntity<Void> update(@NotNull @RequestParam UUID id, @NotBlank @RequestParam String roleName) {
-    roleService.update(id,roleName);
+  public ResponseEntity<Void> updateRoleName(@RequestParam UUID id,@RequestParam String roleName) {
+    roleService.updateRoleName(id,roleName);
     return ResponseEntity.ok().build();
   }
 

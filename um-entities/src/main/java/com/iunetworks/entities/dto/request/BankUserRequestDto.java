@@ -8,24 +8,18 @@ import java.util.Date;
 
 public class BankUserRequestDto {
 
-  @NotBlank
   private String name;
 
-  @NotBlank
   private String surname;
 
-  @NotBlank
   private String email;
 
-  @NotNull
   private Gender gender;
 
   private Date dob;
 
-  @NotNull
   private String password;
 
-  @NotNull
   private String confirmPassword;
 
 

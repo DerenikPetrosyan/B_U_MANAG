@@ -23,7 +23,7 @@ public class BankUserEndpoint {
   }
 
   @PostMapping
-  public ResponseEntity<Void> crateBankUser(@Valid @RequestBody BankUserRequestDto dto) {
+  public ResponseEntity<Void> crateBankUser(@RequestBody BankUserRequestDto dto) {
     bankUserService.createBankUser(dto);
     return ResponseEntity.ok().build();
   }

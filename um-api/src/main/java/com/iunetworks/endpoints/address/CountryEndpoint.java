@@ -23,7 +23,7 @@ public class CountryEndpoint {
 
   //crate Country
   @PostMapping
-  public ResponseEntity<Void> crateCountry(@Valid @RequestParam String country) {
+  public ResponseEntity<Void> crateCountry(@RequestParam String country) {
     countryService.crateCountry(country);
     return ResponseEntity.ok().build();
   }
@@ -43,7 +43,7 @@ public class CountryEndpoint {
 
   //edit Country
   @PatchMapping("update-country")
-  public ResponseEntity<Void> update(@NotNull @RequestParam UUID id, @NotBlank @RequestParam String countryName) {
+  public ResponseEntity<Void> update(@RequestParam UUID id,@RequestParam String countryName) {
     countryService.update(id,countryName);
     return ResponseEntity.ok().build();
   }

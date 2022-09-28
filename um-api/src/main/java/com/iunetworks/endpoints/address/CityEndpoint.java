@@ -23,7 +23,7 @@ public class CityEndpoint {
   }
 
   @PostMapping
-  public ResponseEntity<Void> crateCity(@Valid @RequestBody City city) {
+  public ResponseEntity<Void> crateCity(@RequestBody City city) {
     cityService.crateCity(city);
     return ResponseEntity.ok().build();
   }
@@ -40,7 +40,7 @@ public class CityEndpoint {
 
 
   @PatchMapping("/update-city")
-  public ResponseEntity<Void> update(@NotNull @RequestParam UUID id, @NotBlank @RequestParam String cityName) {
+  public ResponseEntity<Void> update(@RequestParam UUID id,@RequestParam String cityName) {
     cityService.update(id, cityName);
     return ResponseEntity.ok().build();
   }

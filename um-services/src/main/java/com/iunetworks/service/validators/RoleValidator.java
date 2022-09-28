@@ -17,10 +17,10 @@ public class RoleValidator {
     this.roleRepository = roleRepository;
   }
 
-  public void isValidRole(Role roleName){
-//    if(roleRepository.existsByRoleName(roleName.getRole())){
-//        throw new DuplicateException("This role already exists");
-//    }
+  public void isValidRole(Role role){
+    if(roleRepository.existsByRoleName(role.getRoleName())){
+        throw new DuplicateException("This role already exists");
+    }
   }
 
   public void existsRole(UUID id) {

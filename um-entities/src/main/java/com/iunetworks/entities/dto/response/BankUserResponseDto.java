@@ -1,14 +1,16 @@
 package com.iunetworks.entities.dto.response;
 
 import com.iunetworks.entities.Role;
+import com.iunetworks.entities.address.Address;
 import com.iunetworks.entities.enums.Gender;
 import com.iunetworks.entities.enums.UserStatus;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-public class  BankUserResponseDto {
+public class BankUserResponseDto {
 
   private UUID id;
 
@@ -24,22 +26,19 @@ public class  BankUserResponseDto {
 
   private UserStatus status;
 
-//  private LocalDateTime dob;
+  private Date dob;
 
-//  private Address address;
+  private Address address;
 
   private LocalDateTime created;
-
-  private LocalDateTime updeted;
 
 
   public BankUserResponseDto() {
   }
 
 
-  public BankUserResponseDto(UUID id,String name, String surname, String email, Gender gender, List<Role> roles,
-                             UserStatus status, LocalDateTime created,
-                             LocalDateTime updeted) {
+  public BankUserResponseDto(UUID id, String name, String surname, String email, Gender gender, List<Role> roles,
+                             UserStatus status, Date dob, Address address, LocalDateTime created) {
     this.id = id;
     this.name = name;
     this.surname = surname;
@@ -47,10 +46,10 @@ public class  BankUserResponseDto {
     this.gender = gender;
     this.roles = roles;
     this.status = status;
-//    this.dob = dob;
-//    this.address = address;
+    this.dob = dob;
+    this.address = address;
     this.created = created;
-    this.updeted = updeted;
+
   }
 
   public UUID getId() {
@@ -97,10 +96,6 @@ public class  BankUserResponseDto {
     return roles;
   }
 
-  public void setRole(List<Role> roles) {
-    this.roles = roles;
-  }
-
   public UserStatus getStatus() {
     return status;
   }
@@ -109,21 +104,6 @@ public class  BankUserResponseDto {
     this.status = status;
   }
 
-//  public LocalDateTime getDob() {
-//    return dob;
-//  }
-//
-//  public void setDob(LocalDateTime dob) {
-//    this.dob = dob;
-//  }
-
-//  public Address getAddress() {
-//    return address;
-//  }
-//
-//  public void setAddress(Address address) {
-//    this.address = address;
-//  }
 
   public LocalDateTime getCreated() {
     return created;
@@ -133,12 +113,24 @@ public class  BankUserResponseDto {
     this.created = created;
   }
 
-  public LocalDateTime getUpdeted() {
-    return updeted;
+  public void setRoles(List<Role> roles) {
+    this.roles = roles;
   }
 
-  public void setUpdeted(LocalDateTime updeted) {
-    this.updeted = updeted;
+  public Date getDob() {
+    return dob;
+  }
+
+  public void setDob(Date dob) {
+    this.dob = dob;
+  }
+
+  public Address getAddress() {
+    return address;
+  }
+
+  public void setAddress(Address address) {
+    this.address = address;
   }
 
   @Override
@@ -150,11 +142,10 @@ public class  BankUserResponseDto {
       ", email='" + email + '\'' +
       ", gender=" + gender +
       ", roles=" + roles +
-      ", status='" + status + '\'' +
-//      ", dob=" + dob +
-//      ", address=" + address +
+      ", status=" + status +
+      ", dob=" + dob +
+      ", address=" + address +
       ", created=" + created +
-      ", updeted=" + updeted +
       '}';
   }
 }

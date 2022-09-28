@@ -69,7 +69,6 @@ public class CustomerUserServiceImpl implements CustomerUserService {
   @Override
   public void update(CustomerUserRequestDto dto) {
     customerUserValidator.isValidCustomerUser(dto);
-//  customerUserRepository.update(dto);
   }
 
   @Override

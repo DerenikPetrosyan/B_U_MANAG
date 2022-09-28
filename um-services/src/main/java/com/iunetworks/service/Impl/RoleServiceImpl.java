@@ -44,14 +44,14 @@ public class RoleServiceImpl implements RoleService {
   }
 
   @Override
-  public void update(UUID id, String roleName) {
+  public void updateRoleName(UUID id, String roleName) {
     roleValidator.existsRole(id);
-    roleRepository.update(id, roleName);
+    roleRepository.updateRoleName(id, roleName);
   }
 
   @Override
   public void delete(UUID id) {
     roleValidator.existsRole(id);
-    roleRepository.delete(id);
+    roleRepository.deleteById(id);
   }
 }
