@@ -43,8 +43,8 @@ public class CountryEndpoint {
 
   //edit Country
   @PatchMapping("update-country")
-  public ResponseEntity<Void> update(@RequestParam UUID id,@RequestParam String countryName) {
-    countryService.update(id,countryName);
+  public ResponseEntity<Void> update(@RequestBody Country country) {
+    countryService.update(country);
     return ResponseEntity.ok().build();
   }
 

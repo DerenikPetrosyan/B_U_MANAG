@@ -30,7 +30,7 @@ public class RoleServiceImpl implements RoleService {
   @Override
   public Role getRoleId(UUID id) {
     roleValidator.existsRole(id);
-    return roleRepository.getById(id);
+    return roleRepository.findById(id).get();
   }
 
   @Override
@@ -40,13 +40,15 @@ public class RoleServiceImpl implements RoleService {
 
   @Override
   public Role getRoleByRoleName(String userRole) {
-    return roleRepository.getRoleByRoleName(userRole);
+    return roleRepository.findByRoleName(userRole);
   }
 
   @Override
   public void updateRoleName(UUID id, String roleName) {
     roleValidator.existsRole(id);
-    roleRepository.updateRoleName(id, roleName);
+    Role role = roleRepository.findById(id).get();
+    role.setRoleName(roleName);
+    roleRepository.save(role);
   }
 
   @Override

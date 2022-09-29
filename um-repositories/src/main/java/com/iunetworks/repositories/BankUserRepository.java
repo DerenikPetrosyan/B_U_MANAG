@@ -17,20 +17,4 @@ public interface BankUserRepository extends JpaRepository<BankUser, UUID> {
 
   boolean existsByEmail(String email);
 
-//  @Modifying
-//  @Query(value = "select new com.iunetworks.entities.dto.response.BankUserResponseDto(b.id,b.name," +
-//    "b.surname,b.email,b.gender,b.roles,b.status,b.created,b.updated) from BankUser b")
-//  List<BankUserResponseDto> getAll();
-
-//  @Modifying
-//  @Query(nativeQuery = true,
-//    value = "update db_bank_management_um.t_bank_user set name = ?1 where email = ?2")
-//  void changeName(String name, String email);
-
-//  @Modifying
-//  @Query(value = "select new com.iunetworks.entities.dto.response.BankUserResponseDto(b.id,b.name," +
-//    "b.surname,b.email,b.gender,b.roles,b.status,b.created,b.updated) from BankUser b")
-//  BankUserResponseDto getByDtoId(UUID id);
-
-//  void update(BankUserRequestDto dto);
 }

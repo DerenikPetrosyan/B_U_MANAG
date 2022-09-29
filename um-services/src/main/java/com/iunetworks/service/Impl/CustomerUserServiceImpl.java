@@ -69,6 +69,8 @@ public class CustomerUserServiceImpl implements CustomerUserService {
   @Override
   public void update(CustomerUserRequestDto dto) {
     customerUserValidator.isValidCustomerUser(dto);
+    CustomerUser user = customerUserMapper.toCustomerUser(dto);
+    customerUserRepository.save(user);
   }
 
   @Override
@@ -77,14 +79,4 @@ public class CustomerUserServiceImpl implements CustomerUserService {
     customerUserRepository.deleteById(id);
   }
 
-  @Override
-  public void forgotPassword(String email) {
-
-  }
-
-
-  @Override
-  public void changePassword(String username, String oldPassword, String newPassword) {
-
-  }
 }

@@ -52,19 +52,4 @@ public class CustomerUserEndpoint {
 
 
 
-  @PatchMapping("/change-password")
-  public ResponseEntity<Void> changePassword(@RequestParam String username,
-                                             @RequestParam String oldPassword,@RequestParam String newPassword){
-    customerUserService.changePassword(username,oldPassword,newPassword);
-    return ResponseEntity.ok().build();
-  }
-
-  @PatchMapping("/forgot-password")
-  public ResponseEntity<Void> forgotPassword(@RequestParam String email) {
-
-    customerUserService.forgotPassword(email);
-
-    return ResponseEntity.ok().build();
-  }
-
 }

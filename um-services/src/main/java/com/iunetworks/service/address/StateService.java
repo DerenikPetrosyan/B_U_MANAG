@@ -8,17 +8,14 @@ import java.util.UUID;
 
 public interface StateService {
 
-    void crateState(State state);
+  void crateState(State state);
 
-    State getById(UUID id);
+  State getById(UUID id);
 
-    List<State> getByAll();
+  List<State> getByAll();
 
-//    List<State> getByCountryId(UUID countryId);
-
-  void update(UUID id, String stateName);
+  void update(State state);
 
   void delete(UUID id);
-//
-//  List<State>> getByCountryId(UUID countryid);
+
 }

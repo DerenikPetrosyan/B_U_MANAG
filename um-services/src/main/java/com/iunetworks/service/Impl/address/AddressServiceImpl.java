@@ -33,7 +33,7 @@ public class AddressServiceImpl implements AddressService {
 
   @Override
   public Address getById(UUID id) {
-    return addressRepository.getById(id);
+    return addressRepository.findById(id).get();
   }
 
   @Override
@@ -44,13 +44,15 @@ public class AddressServiceImpl implements AddressService {
   @Override
   public void update(Address address) {
   addressValidator.existsAddress(address.getId());
+
+
   addressRepository.save(address);
   }
 
   @Override
   public void delete(UUID id) {
     addressValidator.existsAddress(id);
-    addressRepository.delete(id);
+    addressRepository.deleteById(id);
 
   }
 }

@@ -23,7 +23,7 @@ public class BankUserMapper {
     return bankUser;
   }
 
-  public BankUserResponseDto  toBankUserResponseDto(Optional<BankUser> bankUser){
+  public BankUserResponseDto  toBankUserResponseDto(BankUser bankUser){
     BankUserResponseDto bankUserResponseDto = new BankUserResponseDto();
 
     bankUserResponseDto.setId(bankUser.getId());

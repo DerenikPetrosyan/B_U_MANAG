@@ -15,12 +15,10 @@ import java.util.UUID;
 public class StateServiceImpl implements StateService {
 
   private final StateRepository stateRepository;
-  private final CountryService countryService;
   private final StateValidator stateValidator;
 
-  public StateServiceImpl(StateRepository stateRepository, CountryService countryService, StateValidator stateValidator) {
+  public StateServiceImpl(StateRepository stateRepository, StateValidator stateValidator) {
     this.stateRepository = stateRepository;
-    this.countryService = countryService;
     this.stateValidator = stateValidator;
   }
 
@@ -34,7 +32,7 @@ public class StateServiceImpl implements StateService {
   @Override
   public State getById(UUID id) {
     stateValidator.existsState(id);
-    return stateRepository.getById(id);
+    return stateRepository.findById(id).get();
   }
 
   @Override
@@ -44,16 +42,16 @@ public class StateServiceImpl implements StateService {
   }
 
   @Override
-  public void update(UUID id, String stateName) {
-    stateValidator.existsState(id);
-    stateRepository.updateName(id,stateName);
+  public void update(State state) {
+    stateValidator.existsState(state.getId());
+    stateRepository.save(state);
   }
 
   @Override
   public void delete(UUID id) {
 
     stateValidator.existsState(id);
-    stateRepository.delete(id);
+    stateRepository.deleteById(id);
   }
 
 }

@@ -30,7 +30,7 @@ public class CityServiceImpl implements CityService {
   @Override
   public City getById(UUID id) {
     cityValidator.existsCity(id);
-    return cityRepository.getById(id);
+    return cityRepository.findById(id).get();
   }
 
   @Override
@@ -39,15 +39,15 @@ public class CityServiceImpl implements CityService {
   }
 
   @Override
-  public void update(UUID id, String cityName) {
-    cityValidator.existsCity(id);
-    cityRepository.updateName(id,cityName);
+  public void update(City city) {
+    cityValidator.existsCity(city.getId());
+    cityRepository.save(city);
 
   }
 
   @Override
   public void delete(UUID id) {
     cityValidator.existsCity(id);
-    cityRepository.delete(id);
+    cityRepository.deleteById(id);
   }
 }

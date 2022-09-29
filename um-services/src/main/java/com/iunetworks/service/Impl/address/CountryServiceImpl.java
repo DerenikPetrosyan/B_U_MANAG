@@ -33,7 +33,7 @@ public class CountryServiceImpl implements CountryService {
   @Override
   public Country getById(UUID id) {
     countryValidator.existsCountry(id);
-    return countryRepository.getById(id);
+    return countryRepository.findById(id).get();
   }
 
   @Override
@@ -43,15 +43,15 @@ public class CountryServiceImpl implements CountryService {
 
 
   @Override
-  public void update(UUID id, String countryName) {
-    countryValidator.existsCountry(id);
-    countryRepository.updateName(id, countryName);
+  public void update(Country  country) {
+    countryValidator.existsCountry(country.getId());
+    countryRepository.save(country);
   }
 
   @Override
   public void delete(UUID id) {
     countryValidator.existsCountry(id);
-    countryRepository.delete(id);
+    countryRepository.deleteById(id);
   }
 
 }

@@ -40,8 +40,8 @@ public class StateEndpoint {
 
 
   @PatchMapping("/update-state")
-  public ResponseEntity<Void> update(@RequestParam UUID id,@RequestParam String stateName) {
-    stateService.update(id,stateName);
+  public ResponseEntity<Void> update(@RequestBody State state) {
+    stateService.update(state);
     return ResponseEntity.ok().build();
   }
 

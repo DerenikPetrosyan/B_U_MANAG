@@ -13,7 +13,7 @@ public interface CountryService {
 
   List<Country> getByAll();
 
-  void update(UUID id, String countryName);
+  void update(Country country);
 
   void delete(UUID id);
 

@@ -14,11 +14,6 @@ public interface CustomerUserService {
 
   List<CustomerUserResponseDto> getAll();
 
-  void forgotPassword(String email);
-
-
-  void changePassword(String username, String oldPassword, String newPassword);
-
   void update(CustomerUserRequestDto dto);
 
   void delete(UUID id);

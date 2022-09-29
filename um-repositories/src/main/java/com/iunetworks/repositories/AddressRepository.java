@@ -11,10 +11,4 @@ import java.util.UUID;
 @Repository
 public interface AddressRepository extends JpaRepository<Address,UUID > {
 
-  Address getById(UUID id);
-
-  @Modifying
-  @Query(nativeQuery = true,
-    value = "delete from db_bank_management_um.t_address where id = ?1")
-  void delete(UUID id);
 }

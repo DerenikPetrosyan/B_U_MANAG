@@ -1,14 +1,12 @@
 package com.iunetworks.endpoints;
 
-import com.iunetworks.entities.BankUser;
+
 import com.iunetworks.entities.dto.request.BankUserRequestDto;
 import com.iunetworks.entities.dto.response.BankUserResponseDto;
 import com.iunetworks.service.BankUserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 import java.util.UUID;
 
@@ -34,7 +32,7 @@ public class BankUserEndpoint {
   }
 
   @GetMapping
-  public ResponseEntity<List<BankUser>> getAll() {
+  public ResponseEntity<List<BankUserResponseDto>> getAll() {
     return ResponseEntity.ok(bankUserService.getAll());
   }
 
@@ -52,31 +50,4 @@ public class BankUserEndpoint {
   }
 
 
-
-  @PatchMapping("/edit_bamnk_user_name")
-  public ResponseEntity<Void> changeName(@RequestParam String name,@RequestParam String email) {
-    bankUserService.changeName(name,email);
-    return ResponseEntity.ok().build();
-  }
-
-//  @PatchMapping("/verify")
-//  public ResponseEntity<Void> verify(@RequestParam String email, @RequestParam String code){
-//    bankUserService.verify(email,code);
-//    return ResponseEntity.ok().build();
-//  }
-
-  @PatchMapping("/change-password")
-  public ResponseEntity<Void> changePassword(@RequestParam String username,
-                                             @RequestParam String oldPassword,@RequestParam String newPassword){
-    bankUserService.changePassword(username,oldPassword,newPassword);
-    return ResponseEntity.ok().build();
-  }
-
-  @PatchMapping("/forgot-password")
-  public ResponseEntity<Void> forgotPassword(@RequestParam String email) {
-
-    bankUserService.forgotPassword(email);
-
-    return ResponseEntity.ok().build();
-  }
 }

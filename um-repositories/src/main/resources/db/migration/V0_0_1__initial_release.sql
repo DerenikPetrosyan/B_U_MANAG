@@ -1,3 +1,4 @@
+
 create table t_bank_user
 (
   id                   uuid primary key,
@@ -5,28 +6,8 @@ create table t_bank_user
   name                 varchar(25) not null,
   surname              varchar(25) not null,
   email                varchar(25) not null,
-  u_password           varchar(25) not null,
-  gender               varchar(25) not null,
-  status               varchar(25) not null,
-  dob                  timestamp,
-  reset_password_token varchar(25),
-  address_id           uuid,
-  created              timestamp   not null,
-  updated              timestamp   not null,
-  deleted              timestamp,
-
-  constraint uk_email_deleted unique (email, deleted)
-);
-
-create table t_costomer_user
-(
-  id                   uuid primary key,
-
-  name                 varchar(25) not null,
-  surname              varchar(25) not null,
-  email                varchar(25) not null,
-  u_password           varchar(25) not null,
-  gender               varchar(25) not null,
+  u_password           varchar(255) not null,
+  gender               varchar(25) ,
   status               varchar(25) not null,
   dob                  timestamp,
   reset_password_token varchar(25),
@@ -36,6 +17,26 @@ create table t_costomer_user
   deleted              timestamp,
 
   constraint uk_email_deleted2 unique (email, deleted)
+);
+
+create table t_costomer_user
+(
+  id                   uuid primary key,
+
+  name                 varchar(25) not null,
+  surname              varchar(25) not null,
+  email                varchar(25) not null,
+  u_password           varchar(255) not null,
+  gender               varchar(25) ,
+  status               varchar(25) not null,
+  dob                  timestamp,
+  reset_password_token varchar(25),
+  address_id           uuid,
+  created              timestamp   not null,
+  updated              timestamp   not null,
+  deleted              timestamp,
+
+  constraint uk_email_deleted3 unique (email, deleted)
 );
 
 create table t_roles

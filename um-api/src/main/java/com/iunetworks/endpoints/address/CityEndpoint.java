@@ -40,8 +40,8 @@ public class CityEndpoint {
 
 
   @PatchMapping("/update-city")
-  public ResponseEntity<Void> update(@RequestParam UUID id,@RequestParam String cityName) {
-    cityService.update(id, cityName);
+  public ResponseEntity<Void> update(@RequestBody City city) {
+    cityService.update(city);
     return ResponseEntity.ok().build();
   }
 

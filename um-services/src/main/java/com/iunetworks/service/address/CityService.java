@@ -13,9 +13,8 @@ public interface CityService {
 
   List<City> getByAll();
 
-  void update(UUID id, String cityName);
+  void update(City city);
 
   void delete(UUID id);
 
-//    List<City> getByCountryId(UUID countryid);
 }

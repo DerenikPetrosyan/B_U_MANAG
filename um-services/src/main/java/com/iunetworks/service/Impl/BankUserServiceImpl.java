@@ -55,19 +55,20 @@ public class BankUserServiceImpl implements BankUserService {
   @Override
   public BankUserResponseDto getByBankUserId(UUID id) {
     bankUserValidator.existsBankUser(id);
-    return bankUserMapper.toBankUserResponseDto( bankUserRepository.findById(id));
+    return bankUserMapper.toBankUserResponseDto( bankUserRepository.findById(id).get());
   }
 
   @Override
-  public List<BankUser> getAll() {
-    return bankUserRepository.findAll();
+  public List<BankUserResponseDto> getAll() {
+    List<BankUserResponseDto> bankUserResponseDtoList = new ArrayList<>();
+    bankUserRepository.findAll().forEach(bankUser -> bankUserResponseDtoList.add(bankUserMapper.toBankUserResponseDto(bankUser)));
+    return bankUserResponseDtoList;
   }
 
   @Override
   public void update(BankUserRequestDto dto) {
     bankUserValidator.isValidBankUser(dto);
-//    +
-
+    bankUserRepository.save(bankUserMapper.toBankUser(dto));
   }
 
   @Override
@@ -76,20 +77,4 @@ public class BankUserServiceImpl implements BankUserService {
     bankUserRepository.deleteById(id);
   }
 
-  @Override
-  public void forgotPassword(String email) {
-
-  }
-
-
-  @Override
-  public void changePassword(String email, String oldPassword, String newPassword) {
-
-  }
-
-  @Override
-  @Transactional
-  public void changeName(String name, String email) {
-    
-  }
 }
