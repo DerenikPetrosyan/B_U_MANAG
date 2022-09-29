@@ -17,4 +17,6 @@ public interface CustomerUserService {
   void update(CustomerUserRequestDto dto);
 
   void delete(UUID id);
+
+  void cratetoCustomer(CustomerUserRequestDto dto);
 }

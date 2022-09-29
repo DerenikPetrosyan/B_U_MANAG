@@ -54,6 +54,23 @@ public class CustomerUserServiceImpl implements CustomerUserService {
   }
 
   @Override
+  public void cratetoCustomer(CustomerUserRequestDto dto) {
+    customerUserValidator.isValidCustomerUser(dto);
+    CustomerUser customerUser = customerUserMapper.toCustomerUser(dto);
+
+    customerUser.setStatus(UserStatus.ACTIVE);
+
+
+    List<Role> roles = new ArrayList<>();
+    roles.add(roleService.getRoleByRoleName("CUSTOMER_USER"));
+
+    customerUser.setRoles(roles);
+
+    customerUserRepository.save(customerUser);
+
+  }
+
+  @Override
   public CustomerUserResponseDto getByCustomerUserId(UUID id) {
     customerUserValidator.existsCustomerUser(id);
     return customerUserMapper.toCustomerUserResponseDto(customerUserRepository.findById(id).orElse(null));

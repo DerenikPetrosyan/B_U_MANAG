@@ -2,6 +2,7 @@ package com.iunetworks.endpoints;
 
 
 import com.iunetworks.entities.dto.request.BankUserRequestDto;
+import com.iunetworks.entities.dto.request.CustomerUserRequestDto;
 import com.iunetworks.entities.dto.response.BankUserResponseDto;
 import com.iunetworks.service.BankUserService;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +24,13 @@ public class BankUserEndpoint {
   @PostMapping
   public ResponseEntity<Void> crateBankUser(@RequestBody BankUserRequestDto dto) {
     bankUserService.createBankUser(dto);
+
+    return ResponseEntity.ok().build();
+  }
+
+  @PostMapping("/crate_customer")
+  public ResponseEntity<Void> crateCustomer(@RequestBody CustomerUserRequestDto dto) {
+    bankUserService.createCustomer(dto);
     return ResponseEntity.ok().build();
   }
 

@@ -3,8 +3,10 @@ package com.iunetworks.service.Impl;
 import com.iunetworks.entities.BankUser;
 import com.iunetworks.entities.Role;
 import com.iunetworks.entities.dto.request.BankUserRequestDto;
+import com.iunetworks.entities.dto.request.CustomerUserRequestDto;
 import com.iunetworks.entities.dto.response.BankUserResponseDto;
 import com.iunetworks.entities.enums.UserStatus;
+import com.iunetworks.service.CustomerUserService;
 import com.iunetworks.service.RoleService;
 import com.iunetworks.service.mapper.BankUserMapper;
 import com.iunetworks.repositories.BankUserRepository;
@@ -26,11 +28,14 @@ public class BankUserServiceImpl implements BankUserService {
 
   private final RoleService roleService;
 
-  public BankUserServiceImpl(BankUserRepository bankUserRepository, BankUserMapper bankUserMapper, BankUserValidator bankUserValidator, RoleService roleService) {
+  private final CustomerUserService customerUserService;
+
+  public BankUserServiceImpl(BankUserRepository bankUserRepository, BankUserMapper bankUserMapper, BankUserValidator bankUserValidator, RoleService roleService, CustomerUserService customerUserService) {
     this.bankUserRepository = bankUserRepository;
     this.bankUserMapper = bankUserMapper;
     this.bankUserValidator = bankUserValidator;
     this.roleService = roleService;
+    this.customerUserService = customerUserService;
   }
 
   @Override
@@ -50,6 +55,11 @@ public class BankUserServiceImpl implements BankUserService {
 
     bankUserRepository.save(bankUser);
 
+  }
+
+  @Override
+  public void createCustomer(CustomerUserRequestDto dto) {
+    customerUserService.cratetoCustomer(dto);
   }
 
   @Override
