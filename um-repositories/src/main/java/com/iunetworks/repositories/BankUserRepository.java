@@ -17,4 +17,5 @@ public interface BankUserRepository extends JpaRepository<BankUser, UUID> {
 
   boolean existsByEmail(String email);
 
+ BankUser findByEmailAndDeletedIsNull(String email);
 }
