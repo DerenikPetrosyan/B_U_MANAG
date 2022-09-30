@@ -7,5 +7,5 @@ import java.util.Set;
 import java.util.UUID;
 
 public interface PrivilegeRepository extends JpaRepository<Privilege, UUID> {
-  Set<Privilege> findAllByNameInAndDeletedIsNull(Set<String> p);
+//  Set<Privilege> findAllByNameInAndDeletedIsNull(Set<String> p);
 }

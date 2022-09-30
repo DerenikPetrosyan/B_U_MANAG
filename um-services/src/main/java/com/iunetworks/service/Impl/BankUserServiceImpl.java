@@ -26,16 +26,16 @@ public class BankUserServiceImpl implements BankUserService {
 
   private final BankUserValidator bankUserValidator;
 
-  private final RoleService roleService;
-
   private final CustomerUserService customerUserService;
 
-  public BankUserServiceImpl(BankUserRepository bankUserRepository, BankUserMapper bankUserMapper, BankUserValidator bankUserValidator, RoleService roleService, CustomerUserService customerUserService) {
+  private final RoleService roleService;
+
+  public BankUserServiceImpl(BankUserRepository bankUserRepository, BankUserMapper bankUserMapper, BankUserValidator bankUserValidator, CustomerUserService customerUserService, RoleService roleService) {
     this.bankUserRepository = bankUserRepository;
     this.bankUserMapper = bankUserMapper;
     this.bankUserValidator = bankUserValidator;
-    this.roleService = roleService;
     this.customerUserService = customerUserService;
+    this.roleService = roleService;
   }
 
   @Override
@@ -65,7 +65,7 @@ public class BankUserServiceImpl implements BankUserService {
   @Override
   public BankUserResponseDto getByBankUserId(UUID id) {
     bankUserValidator.existsBankUser(id);
-    return bankUserMapper.toBankUserResponseDto( bankUserRepository.findById(id).get());
+    return bankUserMapper.toBankUserResponseDto(bankUserRepository.findById(id).get());
   }
 
   @Override
@@ -78,7 +78,8 @@ public class BankUserServiceImpl implements BankUserService {
   @Override
   public void update(BankUserRequestDto dto) {
     bankUserValidator.isValidBankUser(dto);
-    bankUserRepository.save(bankUserMapper.toBankUser(dto));
+//    +
+
   }
 
   @Override
