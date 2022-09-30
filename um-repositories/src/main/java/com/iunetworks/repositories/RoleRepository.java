@@ -13,7 +13,7 @@ public interface RoleRepository extends JpaRepository<Role, UUID> {
 
   boolean  existsByRoleName(String roleName);
 
-  boolean existsByNameAndDeletedIsNull(String role);
+//  boolean existsByNameAndDeletedIsNull(String role);
 
   Role findByRoleName(String roleName);
 }
