@@ -2,6 +2,7 @@ package com.iunetworks.service;
 
 import com.iunetworks.entities.dto.request.BankUserRequestDto;
 import com.iunetworks.entities.dto.request.CustomerUserRequestDto;
+import com.iunetworks.entities.dto.request.SignInDto;
 import com.iunetworks.entities.dto.response.BankUserResponseDto;
 
 import java.util.List;
@@ -20,4 +21,6 @@ public interface BankUserService {
   void update(BankUserRequestDto dto);
 
   void delete(UUID id);
+
+    void signIn(SignInDto dto);
 }

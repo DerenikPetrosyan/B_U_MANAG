@@ -4,6 +4,7 @@ import com.iunetworks.entities.BankUser;
 import com.iunetworks.entities.Role;
 import com.iunetworks.entities.dto.request.BankUserRequestDto;
 import com.iunetworks.entities.dto.request.CustomerUserRequestDto;
+import com.iunetworks.entities.dto.request.SignInDto;
 import com.iunetworks.entities.dto.response.BankUserResponseDto;
 import com.iunetworks.entities.enums.UserStatus;
 import com.iunetworks.service.CustomerUserService;
@@ -12,6 +13,7 @@ import com.iunetworks.service.mapper.BankUserMapper;
 import com.iunetworks.repositories.BankUserRepository;
 import com.iunetworks.service.BankUserService;
 import com.iunetworks.service.validators.BankUserValidator;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,13 +30,16 @@ public class BankUserServiceImpl implements BankUserService {
 
   private final CustomerUserService customerUserService;
 
+  private final PasswordEncoder passwordEncoder;
+
   private final RoleService roleService;
 
-  public BankUserServiceImpl(BankUserRepository bankUserRepository, BankUserMapper bankUserMapper, BankUserValidator bankUserValidator, CustomerUserService customerUserService, RoleService roleService) {
+  public BankUserServiceImpl(BankUserRepository bankUserRepository, BankUserMapper bankUserMapper, BankUserValidator bankUserValidator, CustomerUserService customerUserService, PasswordEncoder passwordEncoder, RoleService roleService) {
     this.bankUserRepository = bankUserRepository;
     this.bankUserMapper = bankUserMapper;
     this.bankUserValidator = bankUserValidator;
     this.customerUserService = customerUserService;
+    this.passwordEncoder = passwordEncoder;
     this.roleService = roleService;
   }
 
@@ -50,9 +55,9 @@ public class BankUserServiceImpl implements BankUserService {
 
     List<Role> roles = new ArrayList<>();
     roles.add(roleService.getRoleByRoleName("BANK_USER"));
-
     bankUser.setRoles(roles);
 
+    bankUser.setPassword(passwordEncoder.encode(dto.getPassword()));
     bankUserRepository.save(bankUser);
 
   }
@@ -88,4 +93,8 @@ public class BankUserServiceImpl implements BankUserService {
     bankUserRepository.deleteById(id);
   }
 
+  @Override
+  public void signIn(SignInDto dto) {
+
+  }
 }

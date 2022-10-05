@@ -3,6 +3,7 @@ package com.iunetworks.endpoints;
 
 import com.iunetworks.entities.dto.request.BankUserRequestDto;
 import com.iunetworks.entities.dto.request.CustomerUserRequestDto;
+import com.iunetworks.entities.dto.request.SignInDto;
 import com.iunetworks.entities.dto.response.BankUserResponseDto;
 import com.iunetworks.service.BankUserService;
 import org.springframework.http.ResponseEntity;
@@ -54,6 +55,12 @@ public class BankUserEndpoint {
   @DeleteMapping
   public ResponseEntity<Void> delete(@RequestParam UUID id) {
     bankUserService.delete(id);
+    return ResponseEntity.ok().build();
+  }
+
+  @PostMapping("/sign_in_user")
+  public ResponseEntity<Void> signIn(@RequestBody SignInDto dto){
+    bankUserService.signIn(dto);
     return ResponseEntity.ok().build();
   }
 

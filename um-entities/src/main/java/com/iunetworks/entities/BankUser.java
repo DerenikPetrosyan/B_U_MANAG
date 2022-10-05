@@ -1,6 +1,8 @@
 package com.iunetworks.entities;
 
 import javax.persistence.*;
+import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -25,4 +27,5 @@ public class BankUser extends User{
   public void setRoles(List<Role> roles) {
     this.roles = roles;
   }
+
 }
