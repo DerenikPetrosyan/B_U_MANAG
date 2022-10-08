@@ -13,7 +13,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @EnableWebSecurity
-//todo: in your spring version "extends WebSecurityConfigurerAdapter" is deprecated(for more see documentation for your version)
+// todo: in your spring version "extends WebSecurityConfigurerAdapter" is deprecated(for more see documentation for your version)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;

@@ -7,6 +7,7 @@ import com.iunetworks.entities.dto.request.CustomerUserRequestDto;
 import com.iunetworks.entities.dto.request.SignInDto;
 import com.iunetworks.entities.dto.response.BankUserResponseDto;
 import com.iunetworks.entities.enums.UserStatus;
+import com.iunetworks.exception.ResourceNotFoundException;
 import com.iunetworks.service.CustomerUserService;
 import com.iunetworks.service.RoleService;
 import com.iunetworks.service.mapper.BankUserMapper;
@@ -91,6 +92,12 @@ public class BankUserServiceImpl implements BankUserService {
   public void delete(UUID id) {
     bankUserValidator.existsBankUser(id);
     bankUserRepository.deleteById(id);
+  }
+
+  @Override
+  public BankUser getByUsername(String username){
+    bankUserValidator.existsByUsername(username);
+    return bankUserRepository.findByEmailAndDeletedIsNull(username);
   }
 
   @Override

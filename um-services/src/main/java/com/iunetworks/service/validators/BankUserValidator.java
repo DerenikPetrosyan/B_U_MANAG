@@ -46,5 +46,11 @@ public class BankUserValidator {
     }
   }
 
+  public void existsByUsername(String username){
+    if(!bankUserRepository.existsByEmail(username)){
+      throw new ResourceNotFoundException(String.format("Resource with user : {%s} not found",username));
+    }
+  }
+
 }
 

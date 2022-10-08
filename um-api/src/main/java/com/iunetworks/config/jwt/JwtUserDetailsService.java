@@ -1,9 +1,13 @@
 package com.iunetworks.config.jwt;
 
-import com.nga.model.User;
-import com.nga.service.UserService;
+import com.iunetworks.entities.BankUser;
+import com.iunetworks.entities.CustomerUser;
+import com.iunetworks.service.BankUserService;
+import com.iunetworks.service.CustomerUserService;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,23 +19,43 @@ import java.util.Collections;
 public class JwtUserDetailsService implements org.springframework.security.core.userdetails.UserDetailsService {
 
   //todo: need to add your service info: for example
-    /*private final UserService userService;
+  private final BankUserService bankUserService;
+  private final CustomerUserService customerUserService;
 
-    public JwtUserDetailsService(UserService userService) {
-        this.userService = userService;
-    }*/
+  public JwtUserDetailsService(BankUserService bankUserService, CustomerUserService customerUserService) {
+    this.bankUserService = bankUserService;
+    this.customerUserService = customerUserService;
+  }
 
-  @Override
-  @Transactional
   //todo: need to add your user options
-  public UserDetails loadUserByUsername(final String username) {
+  @Transactional
+  @Override
+  public UserDetails loadUserByUsername(String username) {
 
-    User user = userService.getByUsername(username);
+    boolean existsByBankUser = bankUserService.getByUsername(username) == null;
+    boolean existsByCustomerUser = customerUserService.getByUsername(username) == null;
 
     Collection<GrantedAuthority> grantedAuthorities = new ArrayList<>();
-    //GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(user.getAuthority().getRole());
     grantedAuthorities.add((GrantedAuthority) Collections.emptyList());
 
-    return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), grantedAuthorities);
+    if(existsByBankUser && existsByCustomerUser){
+      throw new UsernameNotFoundException("Wrong username: " + username);
+    }
+
+    if(!existsByBankUser){
+      BankUser user = bankUserService.getByUsername(username);
+      user.getRoles().forEach(role -> {
+        grantedAuthorities.add(new SimpleGrantedAuthority(role.getRoleName()));
+      });
+      return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), grantedAuthorities);
+    }
+    else {
+      CustomerUser user = customerUserService.getByUsername(username);
+      user.getRoles().forEach(role -> {
+        grantedAuthorities.add(new SimpleGrantedAuthority(role.getRoleName()));
+      });
+      return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), grantedAuthorities);
+    }
   }
 }
+

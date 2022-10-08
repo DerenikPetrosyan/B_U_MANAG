@@ -35,7 +35,7 @@ public class JwtTokenProvider implements Serializable {
         JWT_TOKEN_SECRET = Base64.getEncoder().encodeToString(JWT_TOKEN_SECRET.getBytes());
     }
 
-    public String createJwt(long userId, String username, int authorityId, List<String> roles, boolean isAccessToken) {
+    public String createJwt(UUID userId, String username, int authorityId, List<String> roles, boolean isAccessToken) {
         Claims claims = Jwts.claims().setSubject(username);
         claims.put("role", roles);
         claims.put("userId", userId);

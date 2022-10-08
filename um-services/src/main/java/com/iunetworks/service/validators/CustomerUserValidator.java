@@ -42,4 +42,10 @@ public class CustomerUserValidator {
       throw new ResourceNotFoundException(String.format("Resource with id : {%s} not found", id.toString()));
     }
   }
+
+  public void existsByUsername(String username){
+    if(!customerUserRepository.existsByEmail(username)){
+      throw new ResourceNotFoundException(String.format("Resource with user : {%s} not found",username));
+    }
+  }
 }

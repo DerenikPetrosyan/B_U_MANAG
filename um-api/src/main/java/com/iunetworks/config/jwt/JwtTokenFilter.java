@@ -30,7 +30,7 @@ public class JwtTokenFilter extends GenericFilterBean {
         this.jwtTokenProvider = jwtTokenProvider;
     }
 
-    //@SneakyThrows
+//    @SneakyThrows
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws ServletException, IOException {
 
@@ -44,6 +44,7 @@ public class JwtTokenFilter extends GenericFilterBean {
                 String tokenType = jwtTokenProvider.getClaims(token).get("tokenType").toString();
 
                 //todo: need to add database checks: for example
+
                 //userService.isExistInDB((int)jwtTokenProvider.getClaims(token).get("userId"));
 
                 if (tokenType.equals(JwtTokenType.REFRESH_TOKEN.name())) {

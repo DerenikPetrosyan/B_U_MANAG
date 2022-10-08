@@ -1,5 +1,6 @@
 package com.iunetworks.service.Impl;
 
+import com.iunetworks.entities.BankUser;
 import com.iunetworks.entities.CustomerUser;
 import com.iunetworks.entities.Role;
 import com.iunetworks.entities.dto.request.CustomerUserRequestDto;
@@ -90,6 +91,11 @@ public class CustomerUserServiceImpl implements CustomerUserService {
     customerUserRepository.save(user);
   }
 
+  @Override
+  public CustomerUser getByUsername(String username){
+    customerUserValidator.existsByUsername(username);
+    return customerUserRepository.findByEmailAndDeletedIsNull(username);
+  }
   @Override
   public void delete(UUID id) {
     customerUserValidator.existsCustomerUser(id);

@@ -1,5 +1,6 @@
 package com.iunetworks.service;
 
+import com.iunetworks.entities.BankUser;
 import com.iunetworks.entities.dto.request.BankUserRequestDto;
 import com.iunetworks.entities.dto.request.CustomerUserRequestDto;
 import com.iunetworks.entities.dto.request.SignInDto;
@@ -23,4 +24,6 @@ public interface BankUserService {
   void delete(UUID id);
 
     void signIn(SignInDto dto);
+
+  public BankUser getByUsername(String username);
 }

@@ -1,5 +1,6 @@
 package com.iunetworks.service;
 
+import com.iunetworks.entities.CustomerUser;
 import com.iunetworks.entities.dto.request.CustomerUserRequestDto;
 import com.iunetworks.entities.dto.response.CustomerUserResponseDto;
 
@@ -19,4 +20,6 @@ public interface CustomerUserService {
   void delete(UUID id);
 
   void cratetoCustomer(CustomerUserRequestDto dto);
+
+  public CustomerUser getByUsername(String username);
 }
