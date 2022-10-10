@@ -60,8 +60,7 @@ public class BankUserEndpoint {
   }
 
   @PostMapping("/sign_in_user")
-  public ResponseEntity<Map<String, String>> signIn(@RequestBody SignInDto dto){
-//    bankUserService.signIn(dto);
+  public ResponseEntity<?> signIn(@RequestBody SignInDto dto){
     return ResponseEntity.ok(bankUserService.signIn(dto));
   }
 

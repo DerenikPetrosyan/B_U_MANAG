@@ -15,6 +15,8 @@ import com.iunetworks.repositories.BankUserRepository;
 import com.iunetworks.service.BankUserService;
 import com.iunetworks.service.util.JwtTokenUtil;
 import com.iunetworks.service.validators.BankUserValidator;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -110,13 +112,15 @@ public class BankUserServiceImpl implements BankUserService {
 
   //   todo:implement this method
   @Override
-  public Map<String, String> signIn(SignInDto dto) {
+  public ResponseEntity<?> signIn(SignInDto dto) {
     bankUserValidator.existsByUsername(dto.getUsername());
     BankUser bankUser = bankUserRepository.findByEmailAndDeletedIsNull(dto.getUsername());
     Set<String> permissions = privilegeService.permissions((Set<Role>) bankUser.getRoles());
     Map<String, String> tokens = new HashMap<>();
     tokens.put("access_token", jwtTokenUtil.generateToken(bankUser.getEmail(), permissions));
     tokens.put("refresh_token", jwtTokenUtil.generateRefreshToken(bankUser.getEmail(),permissions));
-    return tokens;
+
+    return new ResponseEntity<>(tokens, HttpStatus.OK);
   }
+
 }

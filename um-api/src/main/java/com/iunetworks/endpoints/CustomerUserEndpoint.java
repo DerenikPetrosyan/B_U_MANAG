@@ -53,9 +53,9 @@ public class CustomerUserEndpoint {
 
 
   @PostMapping("/sign_in_user")
-  public ResponseEntity<Void> signIn(@RequestBody SignInDto dto){
-    customerUserService.signIn(dto);
-    return ResponseEntity.ok().build();
+  public ResponseEntity<?> signIn(@RequestBody SignInDto dto){
+
+    return ResponseEntity.ok(customerUserService.signIn(dto));
   }
 
 

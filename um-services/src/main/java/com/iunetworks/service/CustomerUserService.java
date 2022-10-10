@@ -4,6 +4,7 @@ import com.iunetworks.entities.CustomerUser;
 import com.iunetworks.entities.dto.request.CustomerUserRequestDto;
 import com.iunetworks.entities.dto.request.SignInDto;
 import com.iunetworks.entities.dto.response.CustomerUserResponseDto;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 import java.util.UUID;
@@ -24,5 +25,5 @@ public interface CustomerUserService {
 
   CustomerUser getByUsername(String username);
 
-  void signIn(SignInDto dto);
+  ResponseEntity<?> signIn(SignInDto dto);
 }

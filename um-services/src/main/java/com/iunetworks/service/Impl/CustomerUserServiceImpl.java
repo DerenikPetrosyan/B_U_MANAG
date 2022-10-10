@@ -13,6 +13,8 @@ import com.iunetworks.service.RoleService;
 import com.iunetworks.service.mapper.CustomerUserMapper;
 import com.iunetworks.service.util.JwtTokenUtil;
 import com.iunetworks.service.validators.CustomerUserValidator;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -105,13 +107,15 @@ public class CustomerUserServiceImpl implements CustomerUserService {
 
 //   todo:implement this method
   @Override
-  public void signIn(SignInDto dto) {
+  public ResponseEntity<?> signIn(SignInDto dto) {
     customerUserValidator.existsByUsername(dto.getUsername());
     CustomerUser customerUser = customerUserRepository.findByEmailAndDeletedIsNull(dto.getUsername());
     Set<String> permissions = privilegeService.permissions((Set<Role>) customerUser.getRoles());
     Map<String, String> tokens = new HashMap<>();
     tokens.put("access_token", jwtTokenUtil.generateToken(customerUser.getEmail(), permissions));
     tokens.put("refresh_token", jwtTokenUtil.generateRefreshToken(customerUser.getEmail(),permissions));
+
+    return new ResponseEntity<>(tokens, HttpStatus.OK);
   }
 
   @Override

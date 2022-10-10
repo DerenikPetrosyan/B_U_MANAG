@@ -5,6 +5,7 @@ import com.iunetworks.entities.dto.request.BankUserRequestDto;
 import com.iunetworks.entities.dto.request.CustomerUserRequestDto;
 import com.iunetworks.entities.dto.request.SignInDto;
 import com.iunetworks.entities.dto.response.BankUserResponseDto;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 import java.util.Map;
@@ -24,7 +25,7 @@ public interface BankUserService {
 
   void delete(UUID id);
 
-  Map<String, String> signIn(SignInDto dto);
+  ResponseEntity<?> signIn(SignInDto dto);
 
   public BankUser getByUsername(String username);
 }
