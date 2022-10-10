@@ -1,19 +1,15 @@
 package com.iunetworks.config.jwt;
 
 import com.iunetworks.entities.BankUser;
+import com.iunetworks.entities.BankUserDetails;
 import com.iunetworks.entities.CustomerUser;
+import com.iunetworks.entities.CustomerUserDetails;
 import com.iunetworks.service.BankUserService;
 import com.iunetworks.service.CustomerUserService;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 
 @Component("myUserDetailsService")
 public class JwtUserDetailsService implements org.springframework.security.core.userdetails.UserDetailsService {
@@ -35,8 +31,8 @@ public class JwtUserDetailsService implements org.springframework.security.core.
     boolean existsByBankUser = bankUserService.getByUsername(username) == null;
     boolean existsByCustomerUser = customerUserService.getByUsername(username) == null;
 
-    Collection<GrantedAuthority> grantedAuthorities = new ArrayList<>();
-    grantedAuthorities.add((GrantedAuthority) Collections.emptyList());
+//    Collection<GrantedAuthority> grantedAuthorities = new ArrayList<>();
+//    grantedAuthorities.add((GrantedAuthority) Collections.emptyList());
 
     if(existsByBankUser && existsByCustomerUser){
       throw new UsernameNotFoundException("Wrong username: " + username);
@@ -44,17 +40,19 @@ public class JwtUserDetailsService implements org.springframework.security.core.
 
     if(!existsByBankUser){
       BankUser user = bankUserService.getByUsername(username);
-      user.getRoles().forEach(role -> {
-        grantedAuthorities.add(new SimpleGrantedAuthority(role.getRoleName()));
-      });
-      return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), grantedAuthorities);
+//      user.getRoles().forEach(role -> {
+//        grantedAuthorities.add(new SimpleGrantedAuthority(role.getRoleName()));
+//      });
+//      return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), grantedAuthorities);
+      return new BankUserDetails(user);
     }
     else {
       CustomerUser user = customerUserService.getByUsername(username);
-      user.getRoles().forEach(role -> {
-        grantedAuthorities.add(new SimpleGrantedAuthority(role.getRoleName()));
-      });
-      return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), grantedAuthorities);
+//      user.getRoles().forEach(role -> {
+//        grantedAuthorities.add(new SimpleGrantedAuthority(role.getRoleName()));
+//      });
+//      return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), grantedAuthorities);
+      return new CustomerUserDetails(user);
     }
   }
 }
