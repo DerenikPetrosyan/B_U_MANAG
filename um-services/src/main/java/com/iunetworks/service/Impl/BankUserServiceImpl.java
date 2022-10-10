@@ -7,12 +7,13 @@ import com.iunetworks.entities.dto.request.CustomerUserRequestDto;
 import com.iunetworks.entities.dto.request.SignInDto;
 import com.iunetworks.entities.dto.response.BankUserResponseDto;
 import com.iunetworks.entities.enums.UserStatus;
-import com.iunetworks.exception.ResourceNotFoundException;
 import com.iunetworks.service.CustomerUserService;
+import com.iunetworks.service.PrivilegeService;
 import com.iunetworks.service.RoleService;
 import com.iunetworks.service.mapper.BankUserMapper;
 import com.iunetworks.repositories.BankUserRepository;
 import com.iunetworks.service.BankUserService;
+import com.iunetworks.service.util.JwtTokenUtil;
 import com.iunetworks.service.validators.BankUserValidator;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -35,13 +36,19 @@ public class BankUserServiceImpl implements BankUserService {
 
   private final RoleService roleService;
 
-  public BankUserServiceImpl(BankUserRepository bankUserRepository, BankUserMapper bankUserMapper, BankUserValidator bankUserValidator, CustomerUserService customerUserService, PasswordEncoder passwordEncoder, RoleService roleService) {
+  private final PrivilegeService privilegeService;
+
+  private final JwtTokenUtil jwtTokenUtil;
+
+  public BankUserServiceImpl(BankUserRepository bankUserRepository, BankUserMapper bankUserMapper, BankUserValidator bankUserValidator, CustomerUserService customerUserService, PasswordEncoder passwordEncoder, RoleService roleService, PrivilegeService privilegeService, JwtTokenUtil jwtTokenUtil) {
     this.bankUserRepository = bankUserRepository;
     this.bankUserMapper = bankUserMapper;
     this.bankUserValidator = bankUserValidator;
     this.customerUserService = customerUserService;
     this.passwordEncoder = passwordEncoder;
     this.roleService = roleService;
+    this.privilegeService = privilegeService;
+    this.jwtTokenUtil = jwtTokenUtil;
   }
 
   @Override
@@ -54,7 +61,7 @@ public class BankUserServiceImpl implements BankUserService {
 
     bankUser.setStatus(UserStatus.UNVERIFIED);
 
-    List<Role> roles = new ArrayList<>();
+    Set<Role> roles = new HashSet<>();
     roles.add(roleService.getRoleByRoleName("BANK_USER"));
     bankUser.setRoles(roles);
 
@@ -100,8 +107,16 @@ public class BankUserServiceImpl implements BankUserService {
     return bankUserRepository.findByEmailAndDeletedIsNull(username);
   }
 
-  @Override
-  public void signIn(SignInDto dto) {
 
+  //   todo:implement this method
+  @Override
+  public Map<String, String> signIn(SignInDto dto) {
+    bankUserValidator.existsByUsername(dto.getUsername());
+    BankUser bankUser = bankUserRepository.findByEmailAndDeletedIsNull(dto.getUsername());
+    Set<String> permissions = privilegeService.permissions((Set<Role>) bankUser.getRoles());
+    Map<String, String> tokens = new HashMap<>();
+    tokens.put("access_token", jwtTokenUtil.generateToken(bankUser.getEmail(), permissions));
+    tokens.put("refresh_token", jwtTokenUtil.generateRefreshToken(bankUser.getEmail(),permissions));
+    return tokens;
   }
 }

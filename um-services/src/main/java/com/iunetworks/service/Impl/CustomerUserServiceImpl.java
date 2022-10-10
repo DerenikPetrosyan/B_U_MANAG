@@ -1,22 +1,22 @@
 package com.iunetworks.service.Impl;
 
-import com.iunetworks.entities.BankUser;
 import com.iunetworks.entities.CustomerUser;
 import com.iunetworks.entities.Role;
 import com.iunetworks.entities.dto.request.CustomerUserRequestDto;
+import com.iunetworks.entities.dto.request.SignInDto;
 import com.iunetworks.entities.dto.response.CustomerUserResponseDto;
 import com.iunetworks.entities.enums.UserStatus;
 import com.iunetworks.repositories.CustomerUserRepository;
 import com.iunetworks.service.CustomerUserService;
+import com.iunetworks.service.PrivilegeService;
 import com.iunetworks.service.RoleService;
 import com.iunetworks.service.mapper.CustomerUserMapper;
+import com.iunetworks.service.util.JwtTokenUtil;
 import com.iunetworks.service.validators.CustomerUserValidator;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class CustomerUserServiceImpl implements CustomerUserService {
@@ -29,11 +29,17 @@ public class CustomerUserServiceImpl implements CustomerUserService {
 
   private final RoleService roleService;
 
-  public CustomerUserServiceImpl(CustomerUserRepository customerUserRepository, CustomerUserMapper customerUserMapper, CustomerUserValidator customerUserValidator, RoleService roleService) {
+  private final PrivilegeService privilegeService;
+
+  private final JwtTokenUtil jwtTokenUtil;
+
+  public CustomerUserServiceImpl(CustomerUserRepository customerUserRepository, CustomerUserMapper customerUserMapper, CustomerUserValidator customerUserValidator, RoleService roleService, PrivilegeService privilegeService, JwtTokenUtil jwtTokenUtil) {
     this.customerUserRepository = customerUserRepository;
     this.customerUserMapper = customerUserMapper;
     this.customerUserValidator = customerUserValidator;
     this.roleService = roleService;
+    this.privilegeService = privilegeService;
+    this.jwtTokenUtil = jwtTokenUtil;
   }
 
   @Override
@@ -46,7 +52,7 @@ public class CustomerUserServiceImpl implements CustomerUserService {
     customerUser.setStatus(UserStatus.UNVERIFIED);
 
 
-    List<Role> roles = new ArrayList<>();
+    Set<Role> roles = new HashSet<>();
     roles.add(roleService.getRoleByRoleName("CUSTOMER_USER"));
 
     customerUser.setRoles(roles);
@@ -62,7 +68,7 @@ public class CustomerUserServiceImpl implements CustomerUserService {
     customerUser.setStatus(UserStatus.ACTIVE);
 
 
-    List<Role> roles = new ArrayList<>();
+    Set<Role> roles = new HashSet<>();
     roles.add(roleService.getRoleByRoleName("CUSTOMER_USER"));
 
     customerUser.setRoles(roles);
@@ -96,10 +102,24 @@ public class CustomerUserServiceImpl implements CustomerUserService {
     customerUserValidator.existsByUsername(username);
     return customerUserRepository.findByEmailAndDeletedIsNull(username);
   }
+
+//   todo:implement this method
+  @Override
+  public void signIn(SignInDto dto) {
+    customerUserValidator.existsByUsername(dto.getUsername());
+    CustomerUser customerUser = customerUserRepository.findByEmailAndDeletedIsNull(dto.getUsername());
+    Set<String> permissions = privilegeService.permissions((Set<Role>) customerUser.getRoles());
+    Map<String, String> tokens = new HashMap<>();
+    tokens.put("access_token", jwtTokenUtil.generateToken(customerUser.getEmail(), permissions));
+    tokens.put("refresh_token", jwtTokenUtil.generateRefreshToken(customerUser.getEmail(),permissions));
+  }
+
   @Override
   public void delete(UUID id) {
     customerUserValidator.existsCustomerUser(id);
     customerUserRepository.deleteById(id);
   }
+
+
 
 }

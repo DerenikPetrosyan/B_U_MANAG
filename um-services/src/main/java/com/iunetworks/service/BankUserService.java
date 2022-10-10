@@ -7,6 +7,7 @@ import com.iunetworks.entities.dto.request.SignInDto;
 import com.iunetworks.entities.dto.response.BankUserResponseDto;
 
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 public interface BankUserService {
@@ -23,7 +24,7 @@ public interface BankUserService {
 
   void delete(UUID id);
 
-    void signIn(SignInDto dto);
+  Map<String, String> signIn(SignInDto dto);
 
   public BankUser getByUsername(String username);
 }

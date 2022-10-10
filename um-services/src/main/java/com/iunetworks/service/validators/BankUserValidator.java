@@ -24,15 +24,21 @@ public class BankUserValidator {
 
     if (bankUserRepository.existsByEmail(dto.getEmail())) {
       throw new DuplicateException("This email is already registered or does not exist, try a new email");
-    } else if (dto.getPassword().compareTo(dto.getConfirmPassword()) != 0) {
+    }
+    if (dto.getPassword().compareTo(dto.getConfirmPassword()) != 0) {
       throw new BadRequestException("The Confirm Password field does not match the Password field");
-    }else if (dto.getName().charAt(0) < 65 && dto.getName().charAt(0) > 90 ||  dto.getName().charAt(0) < 97 && dto.getName().charAt(0) > 122 ){
-      throw new BadRequestException("The name fild must begin with an uppercase or lowercase English letter");
-    }else if (dto.getSurname().charAt(0) < 65 && dto.getSurname().charAt(0) > 90 ||  dto.getSurname().charAt(0) < 97 && dto.getSurname().charAt(0) > 122 ){
+    }
+    if (dto.getName().charAt(0) < 65 && dto.getName().charAt(0) > 90 ||  dto.getName().charAt(0) < 97 && dto.getName().charAt(0) > 122 ){
+      throw new BadRequestException(String.format("The name fild must begin with an uppercase or lowercase English letter " + dto.getName().charAt(0)));
+    }
+    if (dto.getSurname().charAt(0) < 65 && dto.getSurname().charAt(0) > 90 ||  dto.getSurname().charAt(0) < 97 && dto.getSurname().charAt(0) > 122 ){
       throw new BadRequestException("The surname fild must begin with an uppercase or lowercase English letter");
-    }else if(emailValidator.isValid(dto.getEmail())){
+    }
+
+    if(!emailValidator.isValid(dto.getEmail())){
       throw new BadRequestException("email must contain '@' and '.',must be entered as *******@***.***");
-    }else if(passwordValidator.isValid(dto.getPassword())){
+    }
+    if(!passwordValidator.isValid(dto.getPassword())){
       throw new BadRequestException("password must be 8 - 20 characters");
     }
 

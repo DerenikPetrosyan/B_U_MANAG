@@ -2,6 +2,7 @@ package com.iunetworks.service;
 
 import com.iunetworks.entities.CustomerUser;
 import com.iunetworks.entities.dto.request.CustomerUserRequestDto;
+import com.iunetworks.entities.dto.request.SignInDto;
 import com.iunetworks.entities.dto.response.CustomerUserResponseDto;
 
 import java.util.List;
@@ -11,7 +12,7 @@ public interface CustomerUserService {
 
   void createCustomerUser(CustomerUserRequestDto dto);
 
-   CustomerUserResponseDto getByCustomerUserId(UUID id);
+  CustomerUserResponseDto getByCustomerUserId(UUID id);
 
   List<CustomerUserResponseDto> getAll();
 
@@ -21,5 +22,7 @@ public interface CustomerUserService {
 
   void cratetoCustomer(CustomerUserRequestDto dto);
 
-  public CustomerUser getByUsername(String username);
+  CustomerUser getByUsername(String username);
+
+  void signIn(SignInDto dto);
 }

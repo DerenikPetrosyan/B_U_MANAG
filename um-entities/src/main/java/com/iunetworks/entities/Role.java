@@ -4,6 +4,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -27,7 +28,7 @@ public class Role {
       name = "role_id", referencedColumnName = "id"),
     inverseJoinColumns = @JoinColumn(
       name = "privilege_id", referencedColumnName = "id"))
-  private List<Privilege> privileges;
+  private Set<Privilege> privileges;
 
   public UUID getId() {
     return id;
@@ -37,11 +38,11 @@ public class Role {
     this.id = id;
   }
 
-  public List<Privilege> getPrivileges() {
+  public Set<Privilege> getPrivileges() {
     return privileges;
   }
 
-  public void setPrivileges(List<Privilege> privileges) {
+  public void setPrivileges(Set<Privilege> privileges) {
     this.privileges = privileges;
   }
 

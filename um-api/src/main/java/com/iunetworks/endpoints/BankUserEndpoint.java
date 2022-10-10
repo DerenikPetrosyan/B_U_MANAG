@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @RestController
@@ -59,9 +60,9 @@ public class BankUserEndpoint {
   }
 
   @PostMapping("/sign_in_user")
-  public ResponseEntity<Void> signIn(@RequestBody SignInDto dto){
-    bankUserService.signIn(dto);
-    return ResponseEntity.ok().build();
+  public ResponseEntity<Map<String, String>> signIn(@RequestBody SignInDto dto){
+//    bankUserService.signIn(dto);
+    return ResponseEntity.ok(bankUserService.signIn(dto));
   }
 
 

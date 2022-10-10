@@ -8,6 +8,7 @@ import com.iunetworks.entities.enums.UserStatus;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 public class BankUserResponseDto {
@@ -22,7 +23,7 @@ public class BankUserResponseDto {
 
   private Gender gender;
 
-  private List<Role> roles;
+  private Set<Role> roles;
 
   private UserStatus status;
 
@@ -37,7 +38,7 @@ public class BankUserResponseDto {
   }
 
 
-  public BankUserResponseDto(UUID id, String name, String surname, String email, Gender gender, List<Role> roles,
+  public BankUserResponseDto(UUID id, String name, String surname, String email, Gender gender, Set<Role> roles,
                              UserStatus status, Date dob, Address address, LocalDateTime created) {
     this.id = id;
     this.name = name;
@@ -92,9 +93,7 @@ public class BankUserResponseDto {
     this.gender = gender;
   }
 
-  public List<Role> getRole() {
-    return roles;
-  }
+
 
   public UserStatus getStatus() {
     return status;
@@ -113,9 +112,7 @@ public class BankUserResponseDto {
     this.created = created;
   }
 
-  public void setRoles(List<Role> roles) {
-    this.roles = roles;
-  }
+
 
   public Date getDob() {
     return dob;
@@ -131,6 +128,14 @@ public class BankUserResponseDto {
 
   public void setAddress(Address address) {
     this.address = address;
+  }
+
+  public Set<Role> getRoles() {
+    return roles;
+  }
+
+  public void setRoles(Set<Role> roles) {
+    this.roles = roles;
   }
 
   @Override
