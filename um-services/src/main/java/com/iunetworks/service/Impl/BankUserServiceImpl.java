@@ -64,7 +64,7 @@ public class BankUserServiceImpl implements BankUserService {
     bankUser.setStatus(UserStatus.UNVERIFIED);
 
     Set<Role> roles = new HashSet<>();
-    roles.add(roleService.getRoleByRoleName("BANK_USER"));
+    roles.add(roleService.getRoleByRoleName("BANKUSER"));
     bankUser.setRoles(roles);
 
     bankUser.setPassword(passwordEncoder.encode(dto.getPassword()));
@@ -93,8 +93,6 @@ public class BankUserServiceImpl implements BankUserService {
   @Override
   public void update(BankUserRequestDto dto) {
     bankUserValidator.isValidBankUser(dto);
-//    +
-
   }
 
   @Override

@@ -39,7 +39,9 @@ public class BankUserValidator {
       throw new BadRequestException("email must contain '@' and '.',must be entered as *******@***.***");
     }
     if(!passwordValidator.isValid(dto.getPassword())){
-      throw new BadRequestException("password must be 8 - 20 characters");
+      throw new BadRequestException("Minimum eight in length ," +
+        "at least one upper case English letter,at least one lower case English letter ," +
+        "at least one digit, at least one special character");
     }
 
 

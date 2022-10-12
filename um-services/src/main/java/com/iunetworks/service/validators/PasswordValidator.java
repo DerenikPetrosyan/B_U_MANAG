@@ -8,7 +8,7 @@ public class PasswordValidator {
 
   // digit + lowercase char + uppercase char + punctuation + symbol
   private  final String PASSWORD_PATTERN =
-    "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$";
+    "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$";
 
   private  final Pattern pattern = Pattern.compile(PASSWORD_PATTERN);
 

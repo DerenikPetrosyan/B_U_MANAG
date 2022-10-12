@@ -7,7 +7,7 @@ public class EmailValidator {
 
   // digit + lowercase char + uppercase char + punctuation + symbol
   private  final String EMAIL_PATTERN =
-    " ^[\\\\w!#$%&’*+/=?`{|}~^-]+(?:\\\\.[\\\\w!#$%&’*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\\\.)+[a-zA-Z]{2,6}$";
+    "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$";
 
   private  final Pattern pattern = Pattern.compile(EMAIL_PATTERN);
 
