@@ -1,4 +1,4 @@
-
+-- crate BankUser Entity table
 create table t_bank_user
 (
   id                   uuid primary key,
@@ -19,6 +19,7 @@ create table t_bank_user
   constraint uk_email_deleted2 unique (email, deleted)
 );
 
+-- crate CustomerUser Entity table
 create table t_costomer_user
 (
   id                   uuid primary key,
@@ -39,6 +40,7 @@ create table t_costomer_user
   constraint uk_email_deleted3 unique (email, deleted)
 );
 
+-- crate Role Entity table
 create table t_roles
 (
   id        uuid primary key,
@@ -50,6 +52,7 @@ create table t_roles
 
 );
 
+-- crate Privilege Entity table
 create table privilege
 (
   id   uuid primary key,
